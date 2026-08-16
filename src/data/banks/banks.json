@@ -1,0 +1,74 @@
+{
+  "bpi": {
+    "id":             "bpi",
+    "name":           "BPI",
+    "accountName":    "Jonal Ray Ticug",
+    "accountNumber":  "6246379317",
+    "tone":           "red",
+    "qr":             "bpi.png",
+    "short":          "BPI"
+  },
+  "gcash": {
+    "id":             "gcash",
+    "name":           "GCash",
+    "accountName":    "Jonal Ray Ticug",
+    "accountNumber":  "09083122875",
+    "tone":           "cyan",
+    "qr":             "gcash.png",
+    "short":          "GC"
+  },
+  "gotyme": {
+    "id":             "gotyme",
+    "name":           "GoTyme",
+    "accountName":    "Jonal Ray Ticug",
+    "accountNumber":  "0129 3727 4325",
+    "tone":           "teal",
+    "qr":             "gotyme.png",
+    "short":          "GT"
+  },
+  "maribank": {
+    "id":             "maribank",
+    "name":           "MariBank",
+    "accountName":    "Jonal Ray Ticug",
+    "accountNumber":  "113 7845 224",
+    "tone":           "orange",
+    "qr":             "maribank.jpg",
+    "short":          "MRB"
+  },
+  "maya": {
+    "id":             "maya",
+    "name":           "Maya",
+    "accountName":    "Jonal Ray Ticug",
+    "accountNumber":  "09083122875",
+    "tone":           "green",
+    "qr":             "maya.png",
+    "short":          "MY"
+  },
+  "metrobank": {
+    "id":             "metrobank",
+    "name":           "Metrobank",
+    "accountName":    "Jonal Ray Ticug",
+    "accountNumber":  "563 391 309 5651",
+    "tone":           "blue",
+    "qr":             "metrobank.jpg",
+    "short":          "MB"
+  },
+  "ownbank": {
+    "id":             "ownbank",
+    "name":           "OwnBank",
+    "accountName":    "Jonal Ray Ticug",
+    "accountNumber":  "5403791721244826",
+    "tone":           "green",
+    "qr":             "ownbank.png",
+    "short":          "OWN"
+  },
+  "unionbank": {
+    "id":             "unionbank",
+    "name":           "Unionbank",
+    "accountName":    "Jonal Ray Ticug",
+    "accountNumber":  "1096 5607 5272",
+    "tone":           "orange",
+    "qr":             "unionbank.png",
+    "short":          "UB"
+  }
+}

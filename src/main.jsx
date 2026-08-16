@@ -8,22 +8,9 @@ import BANK_DATA from './data/banks/banks.json'
 
 const TITLES = APP_PROPRETIES.TITLES;
 const SELECTED_TITLE = TITLES[Math.floor(Math.random() * TITLES.length)];
-document.title = document.title.replace("{{title}}", SELECTED_TITLE);
-
-// const BANKS = [
-//   { id: 'bdo', name: 'BDO Unibank, Inc.', short: 'BDO', tone: 'blue', account: '1234 5678 9012' },
-//   { id: 'bpi', name: 'Bank of the Philippine Islands', short: 'BPI', tone: 'red', account: '9876 5432 1098' },
-//   { id: 'metrobank', name: 'Metropolitan Bank & Trust Co.', short: 'MB', tone: 'navy', account: '4567 1234 8901' },
-//   { id: 'gcash', name: 'GCash', short: 'G', tone: 'cyan', account: '0917 123 4567' },
-//   { id: 'maya', name: 'Maya Bank, Inc.', short: 'M', tone: 'green', account: '0966 234 5678' },
-//   { id: 'unionbank', name: 'UnionBank of the Philippines', short: 'UB', tone: 'purple', account: '3456 7890 1234' },
-//   { id: 'security', name: 'Security Bank Corporation', short: 'SB', tone: 'orange', account: '6789 0123 4567' },
-//   { id: 'rcbc', name: 'Rizal Commercial Banking Corporation', short: 'RC', tone: 'teal', account: '2345 6789 0123' }
-// ];
-
 const BANKS = Object.values(BANK_DATA)
-
 const QUICK_BANK_IDS = ['bdo', 'bpi', 'metrobank', 'gcash'];
+
 const QR_IMAGES = import.meta.glob(
   "./data/banks/*.{png,jpg,jpeg,webp}",
   {
@@ -71,14 +58,27 @@ function BankPicker({ selected, onChange }) {
   );
 }
 
-const path = window.location.pathname;
-let pathBankId = path
-  .split("/")
-  .filter(Boolean)
-  .pop();
 
-pathBankId = BANK_DATA[pathBankId] ? pathBankId : "";
+const getBankFromURL = () => {
+  const params = new URLSearchParams(window.location.search);
+  const bankFromQuery = params.get("bank");
+
+  if (bankFromQuery) {
+    return bankFromQuery;
+  }
+
+  const basePath = import.meta.env.BASE_URL.replace(/\/$/, "");
+
+  return window.location.pathname
+    .replace(`${basePath}/`, "")
+    .split("/")
+    .filter(Boolean)[0];
+};
+
+document.title = document.title.replace("{{title}}", SELECTED_TITLE);
+
 function App() {
+  const pathBankId = getBankFromURL();
   const [selectedId, setSelectedId] = useState(pathBankId ? pathBankId : BANKS[0].id);
   const [showAll, setShowAll] = useState(false);
   const [copied, setCopied] = useState(false);
@@ -137,6 +137,21 @@ function App() {
 
     localStorage.setItem("theme", theme);
   }, [theme]);
+
+  useEffect(() => {
+    const basePath = import.meta.env.BASE_URL.replace(/\/$/, "");
+
+    const params = new URLSearchParams(window.location.search);
+    const bank = params.get("bank");
+
+    if (bank) {
+      window.history.replaceState(
+        {},
+        "",
+        `${basePath}/${bank}`
+      );
+    }
+  }, []);
 
   const getQRImage = (filename) => {
     const path = Object.keys(QR_IMAGES).find(
@@ -198,7 +213,7 @@ function App() {
             <button
               className={`quick-bank ${bank.id === selectedId ? 'active' : ''}`}
               key={bank.id}
-              onClick={setSelectedBank}
+              onClick={() => setSelectedBank(bank.id)}
             >
               <BankLogo bank={bank} />
               <span>{bank.name}</span>

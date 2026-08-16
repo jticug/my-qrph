@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <script>
+      const path = window.location.pathname;
+      const base = "/my-qrph";
+
+      if (path.startsWith(base) && path !== base && path !== `${base}/`) {
+        const bank = path
+          .replace(`${base}/`, "")
+          .split("/")
+          .filter(Boolean)[0];
+
+        window.location.replace(
+          `${base}/?bank=${encodeURIComponent(bank)}`
+        );
+      } else {
+        window.location.replace(`${base}/`);
+      }
+    </script>
+  </head>
+  <body></body>
+</html>
